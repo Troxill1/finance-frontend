@@ -1,20 +1,36 @@
-import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
+import NavigationBar from './NavigationBar';
+import Logout from "./Logout";
+import ProtectedRoute from './ProtectedRoute';
+
+import { NotificationProvider } from './contexts/NotificationContext';
+import { AuthTokenProvider } from './contexts/AuthTokenContext';
+
+import './styles/App.css';
 
 function App() {
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/hello')
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(err => console.error('API error: ', err)); 
-  }, []);
-
-  return (
-    <div classname="p-4 text-xl font-bold">
-      Laravel says: {message || 'Loading...'}
-    </div>
-  );
+    return (
+        <AuthTokenProvider>
+            <NotificationProvider>
+                <NavigationBar />
+                <Routes>
+                    <Route path="/" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/dashboard" element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    }
+                    />
+                </Routes>
+            </NotificationProvider>
+        </AuthTokenProvider>
+    );
 }
 
 export default App

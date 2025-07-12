@@ -1,0 +1,49 @@
+#notification-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    position: fixed;
+    top: 60px;
+    right: 0;
+}
+
+div.notification {
+    max-width: 300px;
+    min-width: 250px;
+
+    border-radius: 10px 0 0 10px;
+    box-shadow: 5px 5px 10px black;
+
+    transform: translateX(100%);
+    transition: all 1s ease;
+}
+
+div.notification-expand { transform: translateX(0); }
+div.notification-collapse { transform: translateX(100%); }
+
+.info-notification { background: linear-gradient(to right,rgb(10, 149, 230), rgb(0, 106, 198)); }
+.success-notification { background: linear-gradient(to right, rgb(8, 202, 8),rgb(0, 152, 0)); }
+.warning-notification { background: linear-gradient(to right, rgb(255, 179, 0), rgb(241, 142, 49)); }
+.issue-notification { background: linear-gradient(to right, rgb(255, 0, 0), rgb(183, 3, 3)); }
+
+p.notification {
+    display: inline-block;
+    margin: 0;
+    padding: 15px 25px;
+    font-weight: 700;
+}
+
+button.notification {
+    margin-right: 15px;
+    padding: 0;
+    
+    border: none;
+    outline: none;
+    background: none;
+}
+
+button.notification:hover {
+    color: red;
+    transition: 0.3s ease;
+}
